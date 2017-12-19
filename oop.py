@@ -24,29 +24,30 @@ class hero(object):
 class pawn(hero):
 	steps=1
 	def move(self,arg,cb):
-		if(self.arg=="F" and self.position[0]+steps>=0):
-			self.cb.pos(position[0]+steps,position[1],self.name)
-			self.cb.pos(position[0],position[1],"-")
-			self.position[0]=self.position[0]+1
+		if(arg=="F" and self.position[0]+self.steps>=0):
+			print(self.position)
+			cb.pos(self.position[0]+self.steps,self.position[1],self.owner +"-"+self.name)
+			cb.pos(self.position[0],self.position[1],"-")
+			self.position[0]=self.position[0]+self.steps
 			self.position[1]=self.position[1]
-		if(self.arg=="B" and self.position[0]-steps<=5):
-			self.cb.pos(position[0]-steps,position[1],self.name)
-			self.cb.pos(position[0],position[1],"-")
-			self.position[0]=self.position[0]-steps
+		if(arg=="B" and self.position[0]-steps<=5):
+			cb.pos(self.position[0]-self.steps,self.position[1],self.owner +"-"+self.name)
+			cb.pos(self.position[0],self.position[1],"-")
+			self.position[0]=self.position[0]-self.steps
 			self.position[1]=self.position[1]
 
 class hero1(hero):
 	steps=2
 	def move(self,arg,cb):
-		if(self.arg=="F" and self.position[0]+steps>=0):
-			self.cb.pos(position[0]+steps,position[1],self.name)
-			self.cb.pos(position[0],position[1],"-")
+		if(self.arg=="F" and self.position[0]+self.steps>=0):
+			cb.pos(position[0]+self.steps,self.position[1],self.owner +"-"+self.name)
+			cb.pos(position[0],self.position[1],"-")
 			self.position[0]=self.position[0]+steps
 			self.position[1]=self.position[1]
 		if(self.arg=="B" and self.position[0]-steps<=5):
-			self.cb.pos(position[0]-steps,position[1],self.name)
-			self.cb.pos(position[0],position[1],"-")
-			self.position[0]=self.position[0]-steps
+			cb.pos(self.position[0]-self.steps,self.position[1],self.owner +"-"+self.name)
+			cb.pos(self.position[0],self.position[1],"-")
+			self.position[0]=self.position[0]-self.steps
 			self.position[1]=self.position[1]
 class hero2(hero):
 	steps=2
@@ -54,7 +55,7 @@ class game(object):
 	global a_pawns,b_pawns
 	global pawn_a
 	global pawn_b
-
+	global x
 	def input(self):
 		print("No of rows and columns")
 		self.pawn_a={}
@@ -63,41 +64,43 @@ class game(object):
 		col=int(input())
 		self.a_pawns=col+1
 		self.b_pawns=col+1
-		x=chessboard(row,col)
+		self.x=chessboard(row,col)
 		print("Player A Input")
 		for i in range(col):
 			p=input()
 			if(p[0]=="P"):
 				char=pawn(col-1,i,"A",p)
 				self.pawn_a[p]=char
-				x.pos(col-1,i,"A-P"+p[1])
+				self.x.pos(col-1,i,"A-P"+p[1])
 			elif(p[0]=="H"):
 				char=hero1(col-1,i,"A",p)
 				self.pawn_a[p]=char
-				x.pos(col-1,i,"A-P"+p[1])
+				self.x.pos(col-1,i,"A-P"+p[1])
 			elif(p[0]=="T"):
 				char=hero2(col-1,i,"A",p)
 				self.pawn_a[p]=char
-				x.pos(col-1,i,"A-P"+p[1])
-		x.display()
+				self.x.pos(col-1,i,"A-P"+p[1])
+		self.x.display()
 		print("Player B Input")
 		for i in range(col):
 			p=input()
 			if(p[0]=="P"):
 				char=pawn(0,i,"B",p)
 				self.pawn_b[p]=char
-				x.pos(0,i,"B-P"+p[1])
+				self.x.pos(0,i,"B-P"+p[1])
 			elif(p[0]=="H"):
 				char=hero1(0,i,"B",p)
 				self.pawn_b[p]=char
-				x.pos(0,i,"B-P"+p[1])
+				self.x.pos(0,i,"B-P"+p[1])
 			elif(p[0]=="T"):
 				char=hero2(0,i,"B",p)
 				self.pawn_b[p]=char
-				x.pos(0,i,"B-P"+p[1])
-		x.display()
+				self.x.pos(0,i,"B-P"+p[1])
+		self.x.display()
 	def start(self):
 		while(self.a_pawns!=0 or self.b_pawns !=0):
 			print("A it's your chance")
 			p=input()
-			pawn[p[0:2]].move(p[3:5],x,"A-"+p[0:2])
+			print(self.pawn_a)
+			self.pawn_a[p[0:2]].move(p[3:5],self.x)
+			self.x.display()
