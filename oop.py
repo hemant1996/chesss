@@ -54,10 +54,11 @@ class game(object):
 	global a_pawns,b_pawns
 	global pawn_a
 	global pawn_b
-	pawn_a={}
-	pawn_b={}
+
 	def input(self):
 		print("No of rows and columns")
+		self.pawn_a={}
+		self.pawn_b={}
 		row=int(input())
 		col=int(input())
 		self.a_pawns=col+1
@@ -67,17 +68,17 @@ class game(object):
 		for i in range(col):
 			p=input()
 			if(p[0]=="P"):
-				char=pawn(4,i,"A",p)
+				char=pawn(col-1,i,"A",p)
 				self.pawn_a[p]=char
-				x.pos(4,i,"A-P"+p[1])
+				x.pos(col-1,i,"A-P"+p[1])
 			elif(p[0]=="H"):
-				char=hero1(4,i,"A",p)
+				char=hero1(col-1,i,"A",p)
 				self.pawn_a[p]=char
-				x.pos(4,i,"A-P"+p[1])
+				x.pos(col-1,i,"A-P"+p[1])
 			elif(p[0]=="T"):
-				char=hero2(4,i,"A",p)
+				char=hero2(col-1,i,"A",p)
 				self.pawn_a[p]=char
-				x.pos(4,i,"A-P"+p[1])
+				x.pos(col-1,i,"A-P"+p[1])
 		x.display()
 		print("Player B Input")
 		for i in range(col):
