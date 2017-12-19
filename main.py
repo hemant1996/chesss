@@ -1,8 +1,6 @@
 import sys
 from hero3 import hero3
 from hero1 import hero1
-from pawn import pawn
-from hero import hero
 class coordinate(object):
 	global x,y
 class empty(object):
