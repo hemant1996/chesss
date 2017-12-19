@@ -1,52 +1,14 @@
 import sys
+from hero3 import hero3
+from hero1 import hero1
+from pawn import pawn
+from hero import hero
 class coordinate(object):
 	global x,y
 class empty(object):
 	"""docstring for empty"""
 	name="  -  "
-		
-		
-class hero(object):
-	global x,y
-	global row,col
-	alive= None
-	owner= None
-	name=None
-	def __init__(self, x,y,owner,name,row,col):
-		super(hero, self).__init__()
-		self.x=x
-		self.y=y
-		self.alive= True
-		self.owner=owner
-		self.name=name
-class pawn(hero):
-	steps=1
-	def move(self,x,y,mov,player):
-		if(player=="A"):
-			if(mov=="F"):
-				if(x>0 and x<=5):
-					return[x-1,y]
-				else:
-					return False
-			elif(mov=="B"):
-				if(x<=0 and x>5):
-					return[x+1,y]
-				else:
-					return False				
-			elif(mov=="L"):
-				if(y>0 and y<=5):
-					return[x,y-1]
-				else:
-					return False			
-			elif(mov=="R"):
-				if(y>=0 and y<5):
-					return[x,y+1]
-				else:
-					return False
-class hero1(hero):
-	steps=2
-class hero3(hero):
-	steps=2
+
 class game(object):
 	global x,row,col,a,b
 	global player_a,player_b
