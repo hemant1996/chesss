@@ -1,3 +1,11 @@
+class hero(object):
+	"""docstring for hero"""
+	position=[]
+	def __init__(self, arg1,arg2):
+		super(hero, self).__init__()
+		position= arg
+		self.arg2=
+		
 class game(object):
 	"""docstring for game"""
 	global a_pawns,b_pawns
