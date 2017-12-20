@@ -1,46 +1,36 @@
-from hero import hero
-class pawn(hero):
-	steps=1
-	def move(self,x,y,mov,player,playerb):
-		if(player=="A"):
-			if(mov=="F"):
-				if(x>0 and x<=4):
-					return[x-self.steps,y,0]
+from character import character
+class pawn(character):
+	"""docstring for pawn"""
+	def move(self,chessboard,p):
+		self.conseq=[]
+		if(self.alive):
+			if(p[3]=="F"):
+				new_pos=[self.position[0]-1,self.position[1]]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.position=new_pos
 				else:
-					return False
-			elif(mov=="B"):
-				if(x>=0 and x<4):
-					return[x+self.steps,y,0]
+					print("invalid position")
+			elif(p[3]=="B"):
+				new_pos=[self.position[0]+1,self.position[1]]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.position=new_pos
 				else:
-					return False				
-			elif(mov=="L"):
-				if(y>0 and y<=4):
-					return[x,y-self.steps,0]
+					print("invalid position")
+			elif(p[3]=="L"):
+				new_pos=[self.position[0],self.position[1]-1]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.position=new_pos
 				else:
-					return False			
-			elif(mov=="R"):
-				if(y>=0 and y<4):
-					return[x,y+self.steps,0]
+					print("invalid position")
+			elif(p[3]=="R"):
+				new_pos=[self.position[0],self.position[1]+1]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.position=new_pos
 				else:
-					return False
-		elif(player=="B"):
-			if(mov=="B"):
-				if(x>0 and x<=4):
-					return[x-self.steps,y,0]
-				else:
-					return False
-			elif(mov=="F"):
-				if(x>=0 and x<4):
-					return[x+self.steps,y,0]
-				else:
-					return False				
-			elif(mov=="R"):
-				if(y>0 and y<=4):
-					return[x,y-self.steps,0]
-				else:
-					return False			
-			elif(mov=="L"):
-				if(y>=0 and y<4):
-					return[x,y+self.steps,0]
-				else:
-					return False
+					print("invalid position")
+		else:
+			print("Dead Player")

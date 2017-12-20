@@ -1,52 +1,40 @@
-from hero import hero
-class hero1(hero):
-	steps=2
-	def move(self,x,y,mov,player,playerb):
-		if(player=="A"):
-			if(mov=="F"):
-				if(x>0 and x<=4):
-					c=0
-					for u in playerb:
-						if(playerb[u][0]==x-1 and playerb[u][1]!=y):
-							c=1
-							return[x-self.steps,y,1,[x-1,y]]
-					if(c==0):
-						return[x-self.steps,y,0]						
+from character import character
+class hero1(character):
+	"""docstring for pawn"""
+	def move(self,chessboard,p):
+		self.conseq=[]
+		if(self.alive):
+			if(p[3]=="FR"):
+				new_pos=[self.position[0]-2,self.position[1]+2]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.conseq.append([self.position[0]-1,self.position[1]+1])
+					self.position=new_pos
 				else:
-					return False
-			elif(mov=="B"):
-				if(x>=0 and x<4):
-					return[x+self.steps,y,0]
+					print("invalid position")
+			elif(p[3]=="FL"):
+				new_pos=[self.position[0]-2,self.position[1]-2]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.conseq.append([self.position[0]-1,self.position[1]-1])
+					self.position=new_pos
 				else:
-					return False				
-			elif(mov=="L"):
-				if(y>0 and y<=4):
-					return[x,y-self.steps,0]
+					print("invalid position")
+			elif(p[3]=="BR"):
+				new_pos=[self.position[0]+2,self.position[1]+2]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.conseq.append([self.position[0]-1,self.position[1]+1])
+					self.position=new_pos
 				else:
-					return False			
-			elif(mov=="R"):
-				if(y>=0 and y<4):
-					return[x,y+self.steps,0]
+					print("invalid position")
+			elif(p[3]=="BL"):
+				new_pos=[self.position[0]+2,self.position[1]-2]
+				if(chessboard.valid(new_pos)):
+					self.conseq.append(self.position)
+					self.conseq.append([self.position[0]+1,self.position[1]-1])
+					self.position=new_pos
 				else:
-					return False
-		elif(player=="B"):
-			if(mov=="B"):
-				if(x>0 and x<=4):
-					return[x-self.steps,y,0]
-				else:
-					return False
-			elif(mov=="F"):
-				if(x>=0 and x<4):
-					return[x+self.steps,y,0]
-				else:
-					return False				
-			elif(mov=="R"):
-				if(y>0 and y<=4):
-					return[x,y-self.steps,0]
-				else:
-					return False			
-			elif(mov=="L"):
-				if(y>=0 and y<4):
-					return[x,y+self.steps,0]
-				else:
-					return False
+					print("invalid position")
+		else:
+			print("Dead Player")
